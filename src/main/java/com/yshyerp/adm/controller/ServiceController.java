@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * ysj
+ */
 @RequestMapping("service/")
 @RestController
 @Slf4j
@@ -19,27 +22,7 @@ public class ServiceController implements ControllerTemplate<SerVice> {
 
     @Autowired
     private ServiceService serviceService;
-//  @PostMapping("getservice")
-//    public Response getService(@RequestBody Request<SerVice> serVice){
-//     return serviceService.getService(serVice);
-//  }
 
-//@PostMapping("addService")
-//    public Response addService(@RequestBody  Request<SerVice>  serVice){
-//      return serviceService.addService(serVice.getData());
-//}
-
-//@GetMapping("deleteService/{serviceid}")
-//    public  Response deleteService(@PathVariable    String serviceid){
-//
-//      return serviceService.deleteService(serviceid);
-//}
-
-//  @PostMapping("updateservice")
-//    public Response updateservice(@RequestBody  Request<SerVice> serVice){
-//
-//      return serviceService.updateservice(serVice.getData());
-//  }
 
 
     @Override
