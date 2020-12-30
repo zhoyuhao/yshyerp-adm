@@ -12,10 +12,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
-/**
- * ysj
- */
 @RequestMapping("service/")
 @RestController
 @Slf4j
