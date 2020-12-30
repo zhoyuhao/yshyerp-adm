@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yshyerp.adm.mapper.TankMapper">
+    <resultMap id="BaseResultMap" type="com.yshyerp.adm.entity.TankEntity">
+        <result column="code" property="code" jdbcType="CHAR"/>
+        <result column="code1" property="code1" jdbcType="CHAR"/>
+        <result column="d" property="d" jdbcType="CHAR"/>
+        <result column="tank" property="tank" jdbcType="CHAR"/>
+        <result column="tax" property="tax" jdbcType="BIT"/>
+        <result column="batch_no" property="batchNo" jdbcType="CHAR"/>
+        <result column="date" property="date" jdbcType="TIMESTAMP"/>
+        <result column="t_customer" property="tCustomer" jdbcType="CHAR"/>
+        <result column="c_customer" property="cCustomer" jdbcType="CHAR"/>
+        <result column="commodity" property="commodity" jdbcType="CHAR"/>
+        <result column="oil" property="oil" jdbcType="BIT"/>
+        <result column="oil_o" property="oilO" jdbcType="BIT"/>
+        <result column="tank_h" property="tankH" jdbcType="CHAR"/>
+        <result column="max_h" property="maxH" jdbcType="CHAR"/>
+        <result column="max_v" property="maxV" jdbcType="CHAR"/>
+        <result column="safety_h" property="safetyH" jdbcType="CHAR"/>
+        <result column="safety_v" property="safetyV" jdbcType="CHAR"/>
+        <result column="klitre_cm" property="klitreCm" jdbcType="CHAR"/>
+        <result column="pipe_line" property="pipeLine" jdbcType="CHAR"/>
+        <result column="gauge_m" property="gaugeM" jdbcType="DECIMAL"/>
+        <result column="density" property="density" jdbcType="DECIMAL"/>
+        <result column="quantity" property="quantity" jdbcType="DECIMAL"/>
+        <result column="m_balance" property="mBalance" jdbcType="DECIMAL"/>
+        <result column="h_quan" property="hQuan" jdbcType="DECIMAL"/>
+        <result column="lowest_vol" property="lowestVol" jdbcType="DECIMAL"/>
+        <result column="limit_vol" property="limitVol" jdbcType="DECIMAL"/>
+        <result column="crr_vol" property="crrVol" jdbcType="DECIMAL"/>
+        <result column="crr_vol_use" property="crrVolUse" jdbcType="BIT"/>
+        <result column="lock_tank" property="lockTank" jdbcType="BIT"/>
+        <result column="phase" property="phase" jdbcType="CHAR"/>
+        <result column="commence" property="commence" jdbcType="TIMESTAMP"/>
+        <result column="thruput_mi" property="thruputMi" jdbcType="DECIMAL"/>
+        <result column="station1" property="station1" jdbcType="CHAR"/>
+        <result column="station2" property="station2" jdbcType="CHAR"/>
+        <result column="station3" property="station3" jdbcType="CHAR"/>
+        <result column="c_status" property="cStatus" jdbcType="BIT"/>
+        <result column="t_use" property="tUse" jdbcType="CHAR"/>
+        <result column="last_comm" property="lastComm" jdbcType="CHAR"/>
+        <result column="tenant" property="tenant" jdbcType="CHAR"/>
+        <result column="update_d" property="updateD" jdbcType="TIMESTAMP"/>
+        <result column="crc" property="crc" jdbcType="BIT"/>
+        <result column="crc_1" property="crc1" jdbcType="BIT"/>
+        <result column="coa" property="coa" jdbcType="BIT"/>
+        <result column="coa1" property="coa1" jdbcType="CHAR"/>
+        <result column="coa_p" property="coaP" jdbcType="DECIMAL"/>
+        <result column="crr_use" property="crrUse" jdbcType="BIT"/>
+        <result column="fd" property="fd" jdbcType="BIT"/>
+        <result column="fd_weight" property="fdWeight" jdbcType="DECIMAL"/>
+        <result column="q1" property="q1" jdbcType="DECIMAL"/>
+        <result column="q2" property="q2" jdbcType="DECIMAL"/>
+        <result column="bs" property="bs" jdbcType="BIT"/>
+        <result column="g_type" property="gType" jdbcType="NCHAR"/>
+        <result column="r" property="r" jdbcType="DECIMAL"/>
+        <result column="t" property="t" jdbcType="DECIMAL"/>
+        <result column="m" property="m" jdbcType="DECIMAL"/>
+        <result column="xfz" property="xfz" jdbcType="BIT"/>
+        <result column="temp1" property="temp1" jdbcType="DECIMAL"/>
+        <result column="temp2" property="temp2" jdbcType="DECIMAL"/>
+        <result column="n2" property="n2" jdbcType="CHAR"/>
+        <result column="hot" property="hot" jdbcType="BIT"/>
+        <result column="cool" property="cool" jdbcType="BIT"/>
+        <result column="tg" property="tg" jdbcType="BIT"/>
+        <result column="bw" property="bw" jdbcType="BIT"/>
+        <result column="jr" property="jr" jdbcType="CHAR"/>
+        <result column="hx" property="hx" jdbcType="BIT"/>
+        <result column="zh" property="zh" jdbcType="BIT"/>
+        <result column="u_date" property="uDate" jdbcType="TIMESTAMP"/>
+        <result column="allow_comm" property="allowComm" jdbcType="CHAR"/>
+    </resultMap>
+
+    <insert id="addTank">
+        Insert into tank (tank ,commodity,t_customer,c_customer,[date],code)
+                values
+                        (#{tank},#{commodity},#{tCustomer},#{cCustomer},(select CONVERT(varchar(30),getdate(),120)),#{code})
+    </insert>
+
+    
+    <select id="queryTankDescOne" resultType="String">
+        SELECT top 1 tank from tank where ISNULL(d,' ')=' ' and LEFT(tank,1)='I' ORDER BY tank  desc
+    </select>
+
+    <select id="queryTankCodeDescOne" resultType="String">
+        SELECT top 1 code from tank where ISNULL(d,' ')=' ' and LEFT(tank,1)='I' ORDER BY tank  desc
+    </select>
+    <select id="queryTankByTankAll" resultMap="BaseResultMap">
+        select code,c_customer,t_customer,commodity,tank from tank
+        where ISNULL(d,' ')=' ' and LEFT(tank,1)='I'
+        <if test="tank!=null and tank!=''">
+            and tank = #{tank}
+        </if>
+        <if test="code!=null and code!=''">
+            and code = #{code}
+        </if>
+        <if test="commodity!=null and commodity!=''">
+            and commodity = #{commodity}
+        </if>
+        <if test="tCustomer!=null and tCustomer!=''">
+            and t_customer = #{tCustomer}
+        </if>
+        <if test="cCustomer!=null and cCustomer!=''">
+            and c_customer = #{cCustomer}
+        </if>
+        order by code desc;
+
+    </select>
+
+    <select id="commodityDropDown" resultType="com.yshyerp.adm.response.dto.DropDownBoxDTO">
+        select commodity[key],commodity[value] from commodity where  ISNULL(d,' ')=' ' GROUP BY commodity;
+    </select>
+    <select id="customerDropDown" resultType="com.yshyerp.adm.response.dto.DropDownBoxDTO">
+        select customer[key],customer[value] from customer where  ISNULL(d,' ')=' ' GROUP BY customer;
+    </select>
+
+  <update id="deleteTankeByTank">
+      update tank set D='D' where  (tank in (
+      <foreach collection="list" separator="," item="item">
+          #{item}
+      </foreach>
+      ))
+  </update>
+</mapper>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yshyerp.adm.mapper.TankcMapper">
+    <resultMap id="BaseResultMap" type="com.yshyerp.adm.entity.tankc">
+        <result column="id" property="id" jdbcType="INTEGER"/>
+        <result column="id" property="key" jdbcType="INTEGER"/>
+        <result column="d" property="d" jdbcType="CHAR"/>
+        <result column="tank" property="tank" jdbcType="CHAR"/>
+        <result column="comm1" property="comm1" jdbcType="CHAR"/>
+    </resultMap>
+    <insert id="addTankc">
+        insert into tank_c(d,tank,comm1)
+        values ('',#{tank},#{comm1})
+    </insert>
+    <update id="updateTankc">
+        update tank_c set d=#{d},tank=#{tank},comm1=#{comm1}
+        where id=#{id}
+    </update>
+    <update id="dateleTankc">
+        <foreach collection="list" separator="" item="val">
+            update tank_c set d='D' where id=#{val}
+        </foreach>
+    </update>
+    <select id="getTankc" resultMap="BaseResultMap">
+        select * from tank_c where 1=1 and ISNULL(d,' ')=' '
+        <if test="id!=null and tank!=''">
+            and id=#{id}
+        </if>
+        <if test="tank!=null and tank!=''">
+            and tank=#{tank}
+        </if>
+        <if test="comm1!=null and comm1!=''">
+            and comm1=#{comm1}
+        </if>
+    </select>
+
+
+</mapper>

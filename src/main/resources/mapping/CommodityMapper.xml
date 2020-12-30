@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yshyerp.adm.mapper.CommodityMapper">
+
+    <resultMap id="BaseResultMap" type="com.yshyerp.adm.entity.CommodityEntity">
+        <result column="code" property="code" jdbcType="CHAR"/>
+        <result column="commodity" property="commodity" jdbcType="CHAR"/>
+        <result column="fullname" property="fullname" jdbcType="CHAR"/>
+        <result column="cname" property="cname" jdbcType="CHAR"/>
+        <result column="density" property="density" jdbcType="DECIMAL"/>
+        <result column="comm_code" property="commCode" jdbcType="CHAR"/>
+        <result column="d" property="d" jdbcType="CHAR"/>
+        <result column="wx" property="wx" />
+        <result column="id" property="id" jdbcType="INTEGER"/>
+        <result column="order1" property="order1" jdbcType="DECIMAL"/>
+        <result column="flash" property="flash" jdbcType="DECIMAL"/>
+        <result column="nature" property="nature" jdbcType="CHAR"/>
+        <result column="type" property="type" jdbcType="CHAR"/>
+    </resultMap>
+    <select id="queryCommodityAll" resultMap="BaseResultMap">
+        select *
+        from commodity
+        where ISNULL(d, ' ') = ' '
+        <if test="code!=null and code!=''">
+            and code = #{code}
+        </if>
+        <if test="cname!=null and cname!=''">
+            and cname = #{cname}
+        </if>
+        <if test="fullname!=null and fullname!=''">
+            and fullname = #{fullname}
+        </if>
+        <if test="type!=null and type!=''">
+            and type = #{type}
+        </if>
+        <if test="commodity!=null and commodity!=''">
+          and commodity=#{commodity}
+        </if>
+        <if test="id!=null">
+            and id=#{id}
+        </if>
+        order by commodity
+
+    </select>
+
+    <update id="deleteByCommodity">
+        update commodity set D='D' where  (id in (
+        <foreach collection="list" separator="," item="item">
+            #{item}
+        </foreach>
+        ))
+    </update>
+</mapper>

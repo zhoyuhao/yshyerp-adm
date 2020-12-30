@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yshyerp.adm.mapper.CusEmailMapper" >
+  <resultMap id="BaseResultMap" type="com.yshyerp.adm.entity.CusEmail" >
+    <result column="customer" property="customer" jdbcType="CHAR" />
+    <result column="d1_enabled" property="d1Enabled" jdbcType="BIT" />
+    <result column="d_enabled" property="dEnabled" jdbcType="BIT" />
+    <result column="rd_enabled" property="rdEnabled" jdbcType="BIT" />
+    <result column="rd_mail" property="rdMail" jdbcType="CHAR" />
+    <result column="email1" property="email1" jdbcType="CHAR" />
+    <result column="email2" property="email2" jdbcType="CHAR" />
+    <result column="email3" property="email3" jdbcType="CHAR" />
+    <result column="email4" property="email4" jdbcType="CHAR" />
+    <result column="email5" property="email5" jdbcType="CHAR" />
+    <result column="email6" property="email6" jdbcType="CHAR" />
+    <result column="email7" property="email7" jdbcType="CHAR" />
+    <result column="email8" property="email8" jdbcType="CHAR" />
+  </resultMap>
+  <insert id="insertCustEmail">
+    Insert into cust_email(customer,d_enabled,rd_enabled,rd_mail,email1,email2,email3,email4,email5,email6,email7,email8)
+    values (#{customer},#{dEnabled},#{rdEnabled},#{rdMail},#{email1},#{email2},#{email3},#{email4},#{email5},#{email6},#{email7},#{email8})
+  </insert>
+
+</mapper>

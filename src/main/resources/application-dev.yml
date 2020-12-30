@@ -1,0 +1,44 @@
+#mybatis:
+#  typeAliasesPackage: com.smartflow.sprinbootmybatis.entity
+#  mapperLocations: classpath:mapping/*.xml
+
+mybatis-plus:
+  type-aliases-package: com.yshyerp.adm.entity
+  mapper-locations: classpath:mapping/*.xml
+
+
+##中远
+#spring:
+#  datasource:
+#    url: jdbc:sqlserver://10.208.2.7;databaseName=invdbf
+#    username: yiliu01
+#    password: 87654321
+#    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+
+spring:
+  datasource:
+    url: jdbc:sqlserver://smartflow.diskstation.me:8086;databaseName=invdbf
+    username: sa
+    password: 1qaz@wsx
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+  resources:
+    static-locations: classpath:/static/
+
+server:
+  servlet:
+    context-path: /yshyerp-adm/api
+  port: 8082
+
+logging:
+  level:
+    com:
+      yshyerp: debug
+
+#分页插件
+#pagehelper.dialect=sqlserver2012
+pagehelper:
+  reasonable: true
+  support-methods-arguments: true
+  helper-dialect: sqlserver
+  params: count=countsql
+  pageSizeZero: true

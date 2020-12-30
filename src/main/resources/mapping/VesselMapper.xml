@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yshyerp.adm.mapper.VesselMapper">
+    <resultMap id="BaseResultMap" type="com.yshyerp.adm.entity.Vessel">
+        <result column="vessel" property="vessel" jdbcType="CHAR"/>
+        <result column="type" property="type" jdbcType="CHAR"/>
+        <result column="desc" property="desc" jdbcType="CHAR"/>
+        <result column="c_name" property="cName" jdbcType="CHAR"/>
+        <result column="owner" property="owner" jdbcType="CHAR"/>
+        <result column="operater" property="operater" jdbcType="CHAR"/>
+        <result column="agent" property="agent" jdbcType="CHAR"/>
+        <result column="nationality" property="nationality" jdbcType="CHAR"/>
+        <result column="nation" property="nation" jdbcType="CHAR"/>
+        <result column="length" property="length" jdbcType="DECIMAL"/>
+        <result column="breadth" property="breadth" jdbcType="DECIMAL"/>
+        <result column="draft" property="draft" jdbcType="DECIMAL"/>
+        <result column="net_weight" property="netWeight" jdbcType="DECIMAL"/>
+        <result column="gross_wt" property="grossWt" jdbcType="DECIMAL"/>
+        <result column="load_wt" property="loadWt" jdbcType="DECIMAL"/>
+        <result column="builder" property="builder" jdbcType="CHAR"/>
+        <result column="built_year" property="builtYear" jdbcType="CHAR"/>
+        <result column="load_cap" property="loadCap" jdbcType="DECIMAL"/>
+        <result column="pump_rate" property="pumpRate" jdbcType="DECIMAL"/>
+        <result column="count" property="count" jdbcType="DECIMAL"/>
+        <result column="crane" property="crane" jdbcType="BIT"/>
+    </resultMap>
+    <insert id="addVessel"></insert>
+    <update id="update"></update>
+    <delete id="deleteVessel">
+        delete from [dbo].[vessel] where vessel in (
+        <foreach collection="list" separator="," item="item">
+            #{item}
+        </foreach>)
+    </delete>
+    <select id="getVessel" resultMap="BaseResultMap"></select>
+
+</mapper>

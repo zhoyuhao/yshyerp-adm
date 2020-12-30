@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yshyerp.adm.mapper.CellMapper">
+
+    <resultMap id="BaseResultMap" type="com.yshyerp.adm.entity.Cell">
+        <result column="Id" jdbcType="INTEGER" property="id" />
+        <result column="CreatorId" jdbcType="INTEGER" property="creatorId" />
+        <result column="EditorId" jdbcType="INTEGER" property="editorId" />
+        <result column="FactoryId" jdbcType="INTEGER" property="factoryId" />
+        <result column="AreaId" jdbcType="INTEGER" property="areaId" />
+        <result column="State" jdbcType="INTEGER" property="state" />
+        <result column="CellNumber" jdbcType="VARCHAR" property="cellNumber" />
+        <result column="Description" jdbcType="VARCHAR" property="description" />
+        <result column="EditDateTime" jdbcType="DATE" property="editDateTime" />
+        <result column="CreationDateTime" jdbcType="DATE" property="creationDateTime" />
+    </resultMap>
+
+    <select id="getCell" resultType="com.yshyerp.adm.entity.Cell">
+        select * from core.Cell where id = #{id}
+    </select>
+
+
+    <insert id="addCell" parameterType="com.yshyerp.adm.entity.Cell"
+            useGeneratedKeys="true" keyProperty="id">
+        insert into core.Cell(cellnumber, description,
+                         editdatetime, editorid,
+                         factoryid, creatorid,
+                         creationdatetime, areaid)
+        values(#{cellNumber},#{description},#{editDateTime},
+               #{editorId},#{factoryId},#{creatorId},
+               #{creationDateTime},#{areaId})
+    </insert>
+
+    <update id="upDateCell" parameterType="com.yshyerp.adm.entity.Cell" >
+        update core.Cell set cellnumber=#{cellNumber},description=#{description},
+                             editdatetime=#{editDateTime},editorid=#{editorId},
+                             factoryid=#{factoryId}, creatorid=#{creatorId},
+                             creationdatetime=#{creationDateTime}, areaid=#{areaId}
+                         where id=#{id}
+    </update>
+
+    <delete id="deleteCell" parameterType="int">
+        delete from core.Cell where id=#{id}
+    </delete>
+
+</mapper>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yshyerp.adm.mapper.BukrsprctrMapper">
+    <resultMap id="BaseResultMap" type="com.yshyerp.adm.entity.Bukrsprctr">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <id column="id" property="key" jdbcType="INTEGER"/>
+        <result column="d" property="d" jdbcType="CHAR"/>
+        <result column="bukrs_no" property="bukrsNo" jdbcType="CHAR"/>
+        <result column="bukrsname" property="bukrsname" jdbcType="NVARCHAR"/>
+        <result column="prctr_no" property="prctrNo" jdbcType="CHAR"/>
+        <result column="prctrname" property="prctrname" jdbcType="NVARCHAR"/>
+    </resultMap>
+    <insert id="addBukrsprctr"></insert>
+    <update id="updateBukrsprctr"></update>
+    <update id="daleteBukrsprctr">
+        <foreach collection="list" separator="" item="val">
+            update bukrs_prctr set d='D' where id=#{val}
+        </foreach>
+    </update>
+
+    <select id="getBukrsprctr" resultType="com.yshyerp.adm.entity.Bukrsprctr"></select>
+
+</mapper>

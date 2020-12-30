@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yshyerp.adm.mapper.ScustomerMapper" >
+  <resultMap id="BaseResultMap" type="com.yshyerp.adm.entity.ScustomerEntity" >
+    <result column="customer" property="customer" jdbcType="CHAR" />
+    <result column="s_customer" property="sCustomer" jdbcType="CHAR" />
+    <result column="id" property="id"  />
+    <result column="cname" property="cname" jdbcType="CHAR" />
+    <result column="d" property="d" jdbcType="CHAR" />
+  </resultMap>
+  <update id="deleteByCustomer">
+    <foreach collection="list" separator=";" item="item">
+      update s_customer set d='D' where (  ISNULL(d,' ')=' ' and id=#{item})
+    </foreach>
+  </update>
+
+  <select id="queryCustomer" resultType="com.yshyerp.adm.response.dto.DropDownBoxDTO">
+    SELECT customer as [key] , customer as [value]  FROM customer where ISNULL(d,' ')=' '
+    GROUP BY customer,cname;
+  </select>
+    <select id="queryCustomerAll" resultMap="BaseResultMap">
+      select * from s_customer where (ISNULL(d, ' ') = ' '
+      <if test="customer!=null and customer!=''">
+            and customer=#{customer}
+      </if>
+      <if test="sCustomer!=null and sCustomer!=''">
+        and s_customer=#{sCustomer}
+      </if>
+      <if test="cname!=null and cname!=''">
+        and cname=#{cname}
+      </if>
+      <if test="id!=null and id!=''">
+        and id=#{id}
+      </if>
+     )
+
+        ;
+    </select>
+
+</mapper>

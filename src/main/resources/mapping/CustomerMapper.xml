@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yshyerp.adm.mapper.CustomerMapper">
+    <resultMap id="BaseResultMap" type="com.yshyerp.adm.entity.vo.CustomerVO">
+        <id column="customer" property="customer" jdbcType="CHAR"/>
+        <result column="code" property="code" jdbcType="CHAR"/>
+        <result column="fullname" property="fullname" jdbcType="CHAR"/>
+        <result column="cname" property="cname" jdbcType="CHAR"/>
+        <result column="address" property="address" jdbcType="CHAR"/>
+        <result column="postcode" property="postcode" jdbcType="CHAR"/>
+        <result column="area_code" property="areaCode" jdbcType="CHAR"/>
+        <result column="telephone1" property="telephone1" jdbcType="CHAR"/>
+        <result column="telephone2" property="telephone2" jdbcType="CHAR"/>
+        <result column="faxno" property="faxno" jdbcType="CHAR"/>
+        <result column="contact" property="contact" jdbcType="CHAR"/>
+        <result column="taxno" property="taxno" jdbcType="CHAR"/>
+        <result column="d" property="d" jdbcType="CHAR"/>
+        <result column="drumlock" property="drumlock" jdbcType="DECIMAL"/>
+        <result column="order1" property="order1" jdbcType="DECIMAL"/>
+        <collection property="sCustomer" column="customer" select="queryCustomerAlls"/>
+        <collection property="cusEmailList" column="customer" select="queryEmail"/>
+    </resultMap>
+
+
+    <select id="queryCustomerAlls" resultType="string">
+        select s_customer from  s_customer WHERE  ISNULL(d,' ')=' ' and customer=#{customer};
+    </select>
+
+    <update id="updateEmail">
+        update cust_email set
+                              rd_mail = #{rdMail},
+                              email1 = #{email1},
+                              email2 = #{email2},
+                              email3 = #{email3},
+                              email4 = #{email4},
+                              email5 = #{email5},
+                              email6 = #{email6},
+                              email7 =#{email7},
+                              email8 =#{email8},
+                              d_enabled=${dEnabled},
+                              rd_enabled=${rdEnabled}
+        where customer=#{customer};
+    </update>
+    <select id="queryEmail" resultType="com.yshyerp.adm.entity.CusEmail">
+        SELECT * from cust_email where customer = #{customer};
+    </select>
+    <select id="queryCustomerAll" resultMap="BaseResultMap">
+
+        SELECT * FROM customer where ISNULL(d,' ')=' '
+        <if test="customer!=null and customer!=''">
+            and customer = #{customer}
+        </if>
+        <if test="code!=null and code!=''">
+            and code = #{code}
+        </if>
+        <if test="fullname!=null and fullname!=''">
+            and fullname = #{fullname}
+        </if>
+        <if test="cname!=null and cname!=''">
+            and cname = #{cname}
+        </if>
+        order by customer;
+    </select>
+
+    <update id="updateByCustomer">
+
+        <foreach collection="list" separator=";" item="item">
+            update s_customer set d='D' where (  ISNULL(d,' ')=' ' and customer = #{item})
+        </foreach>
+
+        update customer set D='D' where  (customer in (
+        <foreach collection="list" separator="," item="item">
+            #{item}
+        </foreach>
+        ));
+
+
+    </update>
+</mapper>
