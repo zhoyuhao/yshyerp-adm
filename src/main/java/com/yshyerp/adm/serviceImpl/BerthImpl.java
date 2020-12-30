@@ -29,6 +29,7 @@ import java.util.List;
 @Slf4j
 @Transactional(propagation = Propagation.SUPPORTS, isolation = Isolation.READ_COMMITTED, readOnly = true)
 public class BerthImpl implements BerthService {
+
     @Autowired
     private BerthMapper berthMapper;
 
