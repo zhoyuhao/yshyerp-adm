@@ -8,26 +8,28 @@ mybatis-plus:
 
 
 ##中远
-#spring:
-#  datasource:
-#    url: jdbc:sqlserver://10.208.2.7;databaseName=invdbf
-#    username: yiliu01
-#    password: 87654321
-#    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
-
 spring:
   datasource:
-    url: jdbc:sqlserver://smartflow.diskstation.me:8086;databaseName=invdbf
-    username: sa
-    password: 1qaz@wsx
+    url: jdbc:sqlserver://10.208.2.7;databaseName=invdbf
+    username: yiliu01
+    password: 87654321
+#    url: jdbc:sqlserver://192.168.1.171;databaseName=invdbf
+#    username: sa
+#    password: 888888
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+#spring:
+#  datasource:
+#    url: jdbc:sqlserver://smartflow.diskstation.me:8086;databaseName=invdbf
+#    username: sa
+#    password: 1qaz@wsx
+#    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
   resources:
     static-locations: classpath:/static/
 
 server:
   servlet:
     context-path: /yshyerp-adm/api
-  port: 8082
+  port: 8075
 
 logging:
   level:
